@@ -1,8 +1,13 @@
 import PySimpleGUI as Sg
 
-layout = [[Sg.Text('type your query below')],
-          [Sg.Button('Execute'), Sg.Button('Close Window')],
-          [Sg.Multiline(size=(30, 5), key='textbox')]]
+input_column = [[Sg.Text("enter your query")],
+                [Sg.Multiline(size=(50, 20), key='textbox')],
+                [Sg.Button('Execute'), Sg.Button('Close Window')]]
+output_column = [[Sg.Text("output")],
+                 [Sg.Multiline(size=(50, 20), key='textboxa')]]
+layout = [[Sg.Column(input_column),
+            Sg.VSeperator(),
+           Sg.Column(output_column)]]
 window = Sg.Window("Query executor", layout)
 while True:
     event, values = window.read()
@@ -10,3 +15,4 @@ while True:
         pass
     elif event == "Close Window" or event == Sg.WIN_CLOSED:
         break
+window.close()
