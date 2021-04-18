@@ -16,7 +16,7 @@ CREATE TABLE Produkt (
 );
 
 CREATE TABLE Pracownik (
-  PESEL int primary key NOT NULL,
+  PESEL varchar(11) primary key NOT NULL,
   Imie VARCHAR(45) NULL,
   Nazwisko VARCHAR(45) NOT NULL,
   Stanowisko VARCHAR(45) NULL,
@@ -30,7 +30,7 @@ CREATE TABLE Sprzedaz (
   Pracownik_PESEL NVARCHAR(11) NOT NULL,
   Produkt_idProdukt INT NOT NULL,
   idProdukt int NOT NULL,
-  sprzedawca int NOT NULL,
+  sprzedawca varchar(11) NOT NULL,
   foreign key(idProdukt) references Produkt(idProdukt),
   foreign key(sprzedawca) references Pracownik(PESEL)
  );

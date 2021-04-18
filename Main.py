@@ -1,18 +1,15 @@
 import tkinter as tk
 import mysql.connector
 
-
-print("connecting")
-cnx = mysql.connector.connect(user='root',passwd='Witamserdecznie128', database='sklep')
-print("connection successes")
-
+cnx = mysql.connector.connect(user='root', passwd='Witamserdecznie128', database='sklep')
+cur = cnx.cursor(buffered=True)
 window = tk.Tk()
 lable = tk.Label(text="enter your query")
 entry = tk.Text()
 output = tk.Label(
     width=90,
     height=15,
-    bg="white"
+    bg="white",
 )
 button = tk.Button(
     text="Execute",
@@ -21,10 +18,14 @@ button = tk.Button(
     bg="white",
 )
 
-
 def execute(event):
     query = entry.get("1.0", tk.END)
-    print(query)
+    cur.execute(query,multi=True)
+    results = cur.fetchall()
+    if len(results)>0:
+        output.config(text=results[0])
+    else:
+        output.config(text="done")
 
 
 if __name__ == '__main__':
