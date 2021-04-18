@@ -1,4 +1,10 @@
 import tkinter as tk
+import mysql.connector
+
+
+print("connecting")
+cnx = mysql.connector.connect(user='root',passwd='Witamserdecznie128', database='sklep')
+print("connection successes")
 
 window = tk.Tk()
 lable = tk.Label(text="enter your query")
