@@ -3,34 +3,38 @@ drop table if exists Sprzedaz;
 drop table if exists Produkt;
 drop table if exists Pracownik;
 drop table if exists Sklep;
+drop table if exists Rola;
 CREATE TABLE Sklep (
-  idSklep INT primary key NOT NULL,
-  Lokalizcja VARCHAR(45) NOT NULL,
-  Powierzchnia DECIMAL(10) NULL
+  id INT primary key NOT NULL auto_increment,
+  lokalizcja VARCHAR(45) NOT NULL,
+  powierzchnia DECIMAL(10) NULL
   );
+  
+ CREATE TABLE Rola(
+	id INT primary key NOT NULL auto_increment,
+    nazwa varchar(20)
+ );
 
 CREATE TABLE Produkt (
-  idProdukt INT primary key NOT NULL,
+  id INT primary key NOT NULL auto_increment,
   Nazwa VARCHAR(45) NULL,
   Cena DECIMAL(15) NULL
 );
 
 CREATE TABLE Pracownik (
-  PESEL varchar(11) primary key NOT NULL,
-  Imie VARCHAR(45) NULL,
-  Nazwisko VARCHAR(45) NOT NULL,
-  Stanowisko VARCHAR(45) NULL,
-  Telefon VARCHAR(9) NOT NULL,
-  idSklep int Not NULL,
-  foreign key(idSklep) references Sklep(idSklep)
+  id INT primary key NOT NULL auto_increment,
+  imie VARCHAR(45) NULL,
+  rola int not null,
+  sklep int Not NULL,
+  haslo varchar(20) NOT NULL,
+  foreign key(sklep) references Sklep(id),
+  foreign key(rola) references Rola(id)
 );
 
 CREATE TABLE Sprzedaz (
-  idSprzedaz INT primary key NOT NULL,
-  Pracownik_PESEL NVARCHAR(11) NOT NULL,
-  Produkt_idProdukt INT NOT NULL,
-  idProdukt int NOT NULL,
-  sprzedawca varchar(11) NOT NULL,
-  foreign key(idProdukt) references Produkt(idProdukt),
-  foreign key(sprzedawca) references Pracownik(PESEL)
+  id INT primary key NOT NULL auto_increment,
+  produkt int NOT NULL,
+  sprzedawca INT NOT NULL,
+  foreign key(produkt) references Produkt(id),
+  foreign key(sprzedawca) references Pracownik(id)
  );
